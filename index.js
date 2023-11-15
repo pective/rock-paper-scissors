@@ -4,27 +4,26 @@ const options = ["rock", "paper", "scissors"];
 
 function getComputerChoice(){
   const compChoice = options[Math.floor(Math.random() * options.length)];
-  console.log(getComputerChoice);
+  console.log(compChoice);
   return compChoice;
 }
 
 function Winner(playerChoice, computerChoice){
-  switch (playerChoice, computerChoice) {
-    case playerChoice == computerChoice:
-      console.log("Tie!");
-      break;
-    
-    case playerChoice == "rock" && computerChoice == "scissors":
-    case playerChoice == "paper" && computerChoice == "rock":
-    case playerChoice == "scissors" && computerChoice == "paper":
-      return "Player";
-      break;
-    
-     default:
-      return "Computer";
-      break;
+  if(playerChoice == computerChoice){
+    return "Tie";
+  }  
+  else if(
+    (playerChoice == "rock" && computerChoice == "scissors")||
+    (playerChoice == "paper" && computerChoice == "rock")||
+    (playerChoice == "scissors" && computerChoice == "paper")
+  ){
+    return "Player";
+  }
+  else{
+    return "Computer";
   }
 }
+
 
 function playGame(playerChoice, computerChoice) {
   const result = Winner(playerChoice, computerChoice);
@@ -32,7 +31,7 @@ function playGame(playerChoice, computerChoice) {
     return"Its a tie!";
   }
   else if(result == "Player"){
-    return`You Win! ${playerChoice} beats {computerChoice}`;
+    return`You Win! ${playerChoice} beats ${computerChoice}`;
   }
   else{
     return`You lost! ${computerChoice} beats ${playerChoice}`
@@ -42,5 +41,3 @@ function playGame(playerChoice, computerChoice) {
 const playerChoice = "rock";
 const computerChoice = getComputerChoice();
 console.log(playGame(playerChoice, computerChoice));
-
-getComputerChoice()
