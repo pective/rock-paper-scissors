@@ -27,7 +27,7 @@ function Winner(playerChoice, computerChoice){
 
 function playGame(playerChoice, computerChoice) {
   const result = Winner(playerChoice, computerChoice);
-  if(result == "Tie!"){
+  if(result == "Tie"){
     return"Its a tie!";
   }
   else if(result == "Player"){
