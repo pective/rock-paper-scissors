@@ -37,6 +37,23 @@ function playGame(playerChoice, computerChoice) {
   }
 }
 
+function getPlayerChoice() {
+  let validatedInput = false;
+  while (validatedInput == false){
+    const choice = prompt("Rock Paper Scissors")
+    if (choice == null){
+      continue;
+    }
+    const lowerChoice = choice.toLowerCase();
+    if (options.includes(lowerChoice)) {
+      validatedInput = true;
+      return lowerChoice;
+    }
+  }
+
+
+}
+
 function game() {
   console.log("Welcome to pective's Rock Paper Scissors!")
   for (let i = 0; i < 5; i++) {
