@@ -2,7 +2,8 @@ const options = ["rock", "paper", "scissors"];
 
 function getComputerChoice(){
   const compChoice = Math.floor(Math.random() * options.length)
-  return compChoice;
+  const compOption = options[compChoice];
+  return compOption;
 }
 
 function Winner(playerChoice, computerChoice){
@@ -43,6 +44,7 @@ function getPlayerChoice() {
       continue;
     }
     const lowerChoice = choice.toLowerCase();
+    console.log(lowerChoice)
     if(options.includes(lowerChoice)) {
       validatedInput = true;
       return lowerChoice;
