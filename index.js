@@ -1,64 +1,77 @@
-const options = ["rock", "paper", "scissors"];
-
-function getComputerChoice(){
-  const compChoice = Math.floor(Math.random() * options.length)
-  const compOption = options[compChoice];
-  return compOption;
+function getComputerChoice() {
+    const num = Math.floor(Math.random() * 3);
+    
+    switch (num) {
+        case 0:
+            return 'rock';
+            break;
+        case 1:
+            return 'paper';
+            break;
+        case 2:
+            return 'scissors';
+            break;
+        default:
+            break;
+    }
 }
 
-function Winner(playerChoice, computerChoice){
-  if(playerChoice == computerChoice){
-    return "Tie";
-  }  
-  else if(
-    (playerChoice == "rock" && computerChoice == "scissors")||
-    (playerChoice == "paper" && computerChoice == "rock")||
-    (playerChoice == "scissors" && computerChoice == "paper")
-  ){
-    return "Player";
-  }
-  else{
-    return "Computer";
-  }
+function getHumanChoice() {
+    const preAnswer = prompt('Enter rock, paper, or scissors: ');
+    answer = preAnswer.toLowerCase();
+    return answer;
 }
 
+let humanScore = 0;
+let computerScore = 0;
+
+function playRound(humanChoice, computerChoice) {
+    if (
+        (humanChoice == 'scissors' && computerChoice == 'paper') ||
+        (humanChoice == 'paper' && computerChoice == 'rock') ||
+        (humanChoice == 'rock' && computerChoice == 'scissors')
+    ) {
+        console.log(`You chose ${humanChoice} and the computer chose ${computerChoice}. You win!`);
+        return 'player';
+    } else if (humanChoice == computerChoice) {
+        console.log(`You chose ${humanChoice} and the computer chose ${computerChoice}. It's a tie!`);
+        return 'tie';
+    } else {
+        console.log(`You chose ${humanChoice} and the computer chose ${computerChoice}. You lose!`);
+        return 'computer';
+    }
+}
 
 function playGame(playerChoice, computerChoice) {
-  const result = Winner(playerChoice, computerChoice);
-  if(result == "Tie"){
-    return"Its a tie!";
-  }
-  else if(result == "Player"){
-    return`You Win! ${playerChoice} beats ${computerChoice}`;
-  }
-  else{
-    return`You lost! ${computerChoice} beats ${playerChoice}`
-  }
-}
+    
+    alert("Welcome to pective's grand Rock Paper Scissors Game!")
+    for (let i = 0; i<5; i++) {
+        let playerChoice = getHumanChoice();
+        let computerChoice = getComputerChoice();
 
-function getPlayerChoice() {
-  let validatedInput = false;
-  while (validatedInput == false){
-    const choice = prompt("Rock Paper Scissors")
-    if(choice == null){
-      continue;
+        const winner = playRound(playerChoice, computerChoice);
+
+        // console.log(winner);
+
+        if (winner == 'player') {
+            humanScore++;
+            console.log(`You win round ${(i+1)}`)
+        } else if (winner == 'computer') {
+            computerScore++;
+            console.log(`You lose round ${(i+1)}`)
+        } else {
+            console.log(`Round ${(i+1)} is a tie!`)
+        }
     }
-    const lowerChoice = choice.toLowerCase();
-    console.log(lowerChoice)
-    if(options.includes(lowerChoice)) {
-      validatedInput = true;
-      return lowerChoice;
+
+    console.log(`Your score: ${humanScore}`);
+    console.log(`Computer score: ${computerScore}`);
+    
+    if (humanScore > computerScore) {
+        console.log('You win the Game!');
+    } else {
+        console.log('You Lose!!!!');
     }
-  }
 }
 
-function game() {
-  console.log("Welcome to pective's Rock Paper Scissors!")
-  for (let i = 0; i < 5; i++) {
-    const playerChoice = getPlayerChoice();
-    const computerChoice = getComputerChoice();
-    console.log(playGame(playerChoice, computerChoice));
-  }
-}
-
-game()
+playGame();
