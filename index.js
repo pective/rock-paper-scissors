@@ -24,6 +24,20 @@ function getHumanChoice(button) {
 let humanScore = 0;
 let computerScore = 0;
 
+const scoreDiv = document.getElementById('score');
+function showScore() {
+    scoreDiv.innerHTML = '';
+
+    let humanLiveScore = document.createElement('span');
+    let compLiveScore = document.createElement('span');
+
+    humanLiveScore.textContent = `Your score: ${humanScore} `;
+    compLiveScore.textContent = `Computer's score: ${computerScore}`;
+
+    scoreDiv.appendChild(humanLiveScore);
+    scoreDiv.appendChild(compLiveScore);
+}
+
 const results = document.getElementById('results')
 const res = document.createElement('p');
 function playRound(humanChoice, computerChoice) {
@@ -45,7 +59,10 @@ function playRound(humanChoice, computerChoice) {
         results.appendChild(res);
         return 'computer';
     }
+    
 }
+
+
 
 const buttons = document.querySelectorAll('button');
 buttons.forEach((button) => {
@@ -62,6 +79,8 @@ function game(button) {
     } else if (winner === 'computer') {
         computerScore++;
     }
+
+    showScore();
     
     if (humanScore >= 5 || computerScore >= 5) {
         const gameResult = document.createElement('p');
@@ -72,5 +91,8 @@ function game(button) {
         }
          
         results.appendChild(gameResult);
+
+        humanScore = 0;
+        computerScore = 0;
     }
 }
