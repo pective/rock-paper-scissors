@@ -46,9 +46,31 @@ function playRound(humanChoice, computerChoice) {
         return 'computer';
     }
 }
+
 const buttons = document.querySelectorAll('button');
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
-        playRound(getHumanChoice(button), getComputerChoice());
+        game(button);
     });
 });
+
+function game(button) {
+    let winner = playRound(getHumanChoice(button), getComputerChoice());
+    
+    if (winner === 'player') {
+        humanScore++;
+    } else if (winner === 'computer') {
+        computerScore++;
+    }
+    
+    if (humanScore >= 5 || computerScore >= 5) {
+        const gameResult = document.createElement('p');
+        if (humanScore > computerScore) {
+            gameResult.textContent = "You won the game!";
+        } else {
+            gameResult.textContent = "Computer won the game!";
+        }
+         
+        results.appendChild(gameResult);
+    }
+}
