@@ -24,19 +24,25 @@ function getHumanChoice(button) {
 let humanScore = 0;
 let computerScore = 0;
 
+const results = document.getElementById('results')
+const res = document.createElement('p');
 function playRound(humanChoice, computerChoice) {
     if (
         (humanChoice == 'scissors' && computerChoice == 'paper') ||
         (humanChoice == 'paper' && computerChoice == 'rock') ||
         (humanChoice == 'rock' && computerChoice == 'scissors')
     ) {
-        console.log(`You chose ${humanChoice} and the computer chose ${computerChoice}. You win!`);
+        // console.log(`You chose ${humanChoice} and the computer chose ${computerChoice}. You win!`);
+        res.textContent = `You chose ${humanChoice} and the computer chose ${computerChoice}. You win!`;
+        results.appendChild(res);
         return 'player';
     } else if (humanChoice == computerChoice) {
-        console.log(`You chose ${humanChoice} and the computer chose ${computerChoice}. It's a tie!`);
+        res.textContent = `You chose ${humanChoice} and the computer chose ${computerChoice}. It's a tie!`;
+        results.appendChild(res);
         return 'tie';
     } else {
-        console.log(`You chose ${humanChoice} and the computer chose ${computerChoice}. You lose!`);
+        res.textContent = `You chose ${humanChoice} and the computer chose ${computerChoice}. You lose!`;
+        results.appendChild(res);
         return 'computer';
     }
 }
