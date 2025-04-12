@@ -16,11 +16,10 @@ function getComputerChoice() {
     }
 }
 
-function getHumanChoice() {
-    const preAnswer = prompt('Enter rock, paper, or scissors: ');
-    answer = preAnswer.toLowerCase();
-    return answer;
+function getHumanChoice(button) {
+    return button.textContent.toLowerCase();
 }
+
 
 let humanScore = 0;
 let computerScore = 0;
@@ -41,37 +40,9 @@ function playRound(humanChoice, computerChoice) {
         return 'computer';
     }
 }
-
-function playGame(playerChoice, computerChoice) {
-    
-    alert("Welcome to pective's grand Rock Paper Scissors Game!")
-    for (let i = 0; i<5; i++) {
-        let playerChoice = getHumanChoice();
-        let computerChoice = getComputerChoice();
-
-        const winner = playRound(playerChoice, computerChoice);
-
-        // console.log(winner);
-
-        if (winner == 'player') {
-            humanScore++;
-            console.log(`You win round ${(i+1)}`)
-        } else if (winner == 'computer') {
-            computerScore++;
-            console.log(`You lose round ${(i+1)}`)
-        } else {
-            console.log(`Round ${(i+1)} is a tie!`)
-        }
-    }
-
-    console.log(`Your score: ${humanScore}`);
-    console.log(`Computer score: ${computerScore}`);
-    
-    if (humanScore > computerScore) {
-        console.log('You win the Game!');
-    } else {
-        console.log('You Lose!!!!');
-    }
-}
-
-playGame();
+const buttons = document.querySelectorAll('button');
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        playRound(getHumanChoice(button), getComputerChoice());
+    });
+});
